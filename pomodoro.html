@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomodoro Belajar</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff8fc;
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: #ffe4f2;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    h1 {
+      color: #d63384;
+    }
+    #timer {
+      font-size: 4rem;
+      margin: 1rem 0;
+      font-weight: bold;
+    }
+    button {
+      font-size: 1rem;
+      padding: 0.7rem 1.5rem;
+      margin: 0.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      background-color: #d63384;
+      color: white;
+    }
+    button:hover {
+      background-color: #c2186a;
+    }
+    .note {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .download {
+      display: block;
+      margin-top: 1.5rem;
+      color: #d63384;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .watermark {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pomodoro Belajar 🍅</h1>
+    <div id="timer">25:00</div>
+    <button onclick="startTimer()">Mulai</button>
+    <button onclick="resetTimer()">Reset</button>
+    <a href="#" class="download">⬇️ Download Planner Gratis</a>
+    <p class="note">Fokus selama 25 menit, lalu istirahat 5 menit ya!</p>
+    <p class="watermark">Made with 💖 by <strong>@nabilachoi.gx</strong> — ayo follow!</p>
+    <audio id="alarm" src="https://www.soundjay.com/buttons/sounds/button-3.mp3" preload="auto"></audio>
+  </div>
+
+  <script>
+    let time = 1500; // 25 menit dalam detik
+    let timer;
+
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => {
+        if (time > 0) {
+          time--;
+          displayTime();
+        } else {
+          clearInterval(timer);
+          document.getElementById("alarm").play();
+          alert("Waktunya istirahat! 🌟");
+        }
+      }, 1000);
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      time = 1500;
+      displayTime();
+    }
+
+    function displayTime() {
+      let minutes = Math.floor(time / 60);
+      let seconds = time % 60;
+      document.getElementById("timer").textContent = 
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    displayTime();
+  </script>
+</body>
+</html>
